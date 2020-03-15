@@ -1,0 +1,59 @@
+/*
+ * cmdParser.c
+ *
+ *  Created on: 15 мар. 2020 г.
+ *      Author: Konstantin
+ */
+
+#include "cmdParser.h"
+
+#define CMD_UID_LENGTH 4
+#define CMD_PARAMETERS_LENGTH 4
+
+char flag_cmd = 0;
+char rXcnt = 0;
+
+cmd_config CONFIG;
+cmd CMD = configureCMD(CONFIG);
+
+
+void parseCmd(char c) {
+	switch(flag_cmd) {
+	case 0:
+		if(c == CONFIG.CMD_BEGIN) {
+			flag_cmd = 1;
+			rXcnt = 0;
+		}
+		else {
+			cmd_tx = "unknown command";
+		}
+		break;
+
+	case 1:
+		if(CONFIG.IS_UID) {
+
+		}
+	}
+}
+
+
+void parseCmd(char *buffer, uint16_t buffer_size) {
+	for(uint16_t i = 0; i < buffer_size; i ++) {
+		parseCmd(buffer[i]);
+	}
+}
+
+cmd configureCMD(cmd_config config) {
+	cmd ans;
+	memset(ans.type, 0, sizeof(char)*config.CMD_LENGTH);
+	if(config.IS_UID) {
+		memset(ans.uid, 0, sizeof(char)*CMD_UID_LENGTH);
+	} else {
+		ans.uid = NULL;
+	}
+	ans.data = (char**)malloc(config.PARAMETERS_COUNT);
+	for(int i = 0; i < config.PARAMETERS_COUNT; i ++) {
+		memset(ans.data[i], 0, sizeof(char)*CMD_PARAMETERS_LENGTH);
+	}
+	return ans;
+}
