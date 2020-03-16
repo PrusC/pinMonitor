@@ -24,15 +24,29 @@ void parseCmd(char c) {
 			flag_cmd = 1;
 			rXcnt = 0;
 		}
-		else {
-			cmd_tx = "unknown command";
-		}
 		break;
 
 	case 1:
+		if(rXcnt > CONFIG.CMD_LENGTH || c == CONFIG.CMD_DELIMITER) {
+			flag_cmd ++;
+			rXcnt = 0;
+		} else {
+			CMD.title[rXcnt] = c;
+			rXcnt ++;
+		}
+		break;
+
+	case 2:
 		if(CONFIG.IS_UID) {
 
+		} else {
+			flag_cmd ++;
 		}
+		break;
+
+	case 3:
+
+		break;
 	}
 }
 
@@ -45,7 +59,7 @@ void parseCmd(char *buffer, uint16_t buffer_size) {
 
 cmd configureCMD(cmd_config config) {
 	cmd ans;
-	memset(ans.type, 0, sizeof(char)*config.CMD_LENGTH);
+	memset(ans.title, 0, sizeof(char)*config.CMD_LENGTH);
 	if(config.IS_UID) {
 		memset(ans.uid, 0, sizeof(char)*CMD_UID_LENGTH);
 	} else {

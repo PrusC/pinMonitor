@@ -44,7 +44,7 @@ typedef struct cmd_config {
 } cmd_config;
 
 typedef struct cmd {
-	char *type;
+	char *title;
 	char *uid;
 	char **data;
 } cmd;
