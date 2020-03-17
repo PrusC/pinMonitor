@@ -50,7 +50,7 @@ typedef struct cmd {
 } cmd;
 
 
-extern char *cmd_tx;
+extern uint8_t cmd_ready;
 
 void parseCmd(char c);
 

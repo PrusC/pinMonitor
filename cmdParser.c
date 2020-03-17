@@ -10,8 +10,9 @@
 #define CMD_UID_LENGTH 4
 #define CMD_PARAMETERS_LENGTH 4
 
-char flag_cmd = 0;
-char rXcnt = 0;
+uint16_t flag_cmd = 0;
+uint16_t rXcnt = 0;
+uint8_t cmd_ready = 0;
 
 cmd_config CONFIG;
 cmd CMD = configureCMD(CONFIG);
@@ -27,8 +28,9 @@ void parseCmd(char c) {
 		break;
 
 	case 1:
-		if(rXcnt > CONFIG.CMD_LENGTH || c == CONFIG.CMD_DELIMITER) {
+		if(rXcnt >= CONFIG.CMD_LENGTH || c == CONFIG.CMD_DELIMITER) {
 			flag_cmd ++;
+//			CMD.title[rXcnt] = 0;
 			rXcnt = 0;
 		} else {
 			CMD.title[rXcnt] = c;
@@ -38,13 +40,29 @@ void parseCmd(char c) {
 
 	case 2:
 		if(CONFIG.IS_UID) {
-
+			if(rXcnt > CMD_UID_LENGTH || c == CONFIG.CMD_DELIMITER) {
+				flag_cmd ++;
+				rXcnt = 0;
+			} else {
+				if(c == CONFIG.CMD_END) {
+					cmd_ready = 1;
+					flag_cmd = 0;
+					rXcnt = 0;
+				}
+				CMD.uid[rXcnt] = c;
+				rXcnt ++;
+			}
 		} else {
 			flag_cmd ++;
 		}
 		break;
 
 	case 3:
+		if(c == CONFIG.CMD_END) {
+			cmd_ready = 1;
+			flag_cmd = 0;
+			rXcnt = 0;
+		}
 
 		break;
 	}
