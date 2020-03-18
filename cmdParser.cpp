@@ -26,7 +26,7 @@ void parseCmd(char c) {
 
 	case 1:
 		if(rXcnt >= CONFIG.CMD_LENGTH || c == CONFIG.CMD_DELIMITER) {
-			flag_cmd ++;
+			flag_cmd = 2;
 //			CMD.title[rXcnt] = 0;
 			rXcnt = 0;
 		} else {
@@ -52,7 +52,7 @@ void parseCmd(char c) {
 void parseCmd(char *buffer, uint16_t buffer_size) {
 	uint8_t res = 0;
 	for(uint16_t i = 0; i < buffer_size; i ++) {
-		res = parseCmd(buffer[i]);
+		parseCmd(buffer[i]);
 	}
 }
 

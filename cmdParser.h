@@ -1,5 +1,5 @@
 /*
- * cmdParser_1.h
+ * cmdParser.h
  *
  *  Created on: 17 мар. 2020 г.
  *      Author: kPrusakov
@@ -24,6 +24,7 @@ typedef struct cmd {
 	char *data;
 } cmd;
 
+extern cmd CMD;
 extern uint8_t cmd_ready;
 
 void parseCmd(char c);
