@@ -9,13 +9,15 @@ void loop() {
 
 }
 
+extern cmd CMD;
+
 void serialEvent() {
 	char c = Serial.read();
-	Serial.print(c);
 	parseCmd(c);
+
 	if(cmd_ready) {
-		Serial.write(CMD.title);
-		Serial.print(CMD.data);
+		Serial.println(CMD.title);
+		Serial.println(CMD.data);
 		cmd_ready = 0;
 	}
 

@@ -16,36 +16,40 @@ cmd_config CONFIG;
 cmd CMD = configureCMD(&CONFIG);
 
 void parseCmd(char c) {
-	switch(flag_cmd) {
-	case 0:
-		if(c == CONFIG.CMD_BEGIN) {
-			flag_cmd = 1;
-			rXcnt = 0;
-		}
-		break;
+	if(!cmd_ready) {
+		switch(flag_cmd) {
+			case 0:
+				if(c == CONFIG.CMD_BEGIN) {
+					flag_cmd = 1;
+					rXcnt = 0;
+				}
+				break;
 
-	case 1:
-		if(rXcnt >= CONFIG.CMD_LENGTH || c == CONFIG.CMD_DELIMITER) {
-			flag_cmd = 2;
-//			CMD.title[rXcnt] = 0;
-			rXcnt = 0;
-		} else {
-			CMD.title[rXcnt] = c;
-			rXcnt ++;
-		}
-		break;
+			case 1:
+				if(rXcnt >= CONFIG.CMD_LENGTH || c == CONFIG.CMD_DELIMITER) {
+					flag_cmd = 2;
+					if(rXcnt < CONFIG.CMD_LENGTH-1) {
+						CMD.title[rXcnt] = 0;
+					}
+					rXcnt = 0;
+				} else {
+					CMD.title[rXcnt] = c;
+					rXcnt ++;
+				}
+				break;
 
-	case 2:
-		if(c == CONFIG.CMD_END) {
-			CMD.data[rXcnt] = c;
-			cmd_ready = 1;
-			flag_cmd = 0;
-			rXcnt = 0;
-		} else {
-			CMD.data[rXcnt] = c;
-			rXcnt ++;
+			case 2:
+				if(c == CONFIG.CMD_END) {
+					CMD.data[rXcnt] = c;
+					cmd_ready = 1;
+					flag_cmd = 0;
+					rXcnt = 0;
+				} else {
+					CMD.data[rXcnt] = c;
+					rXcnt ++;
+				}
+				break;
 		}
-		break;
 	}
 }
 
@@ -58,6 +62,8 @@ void parseCmd(char *buffer, uint16_t buffer_size) {
 
 cmd configureCMD(cmd_config* config) {
 	cmd ans;
+	ans.title = (char*)malloc((config->CMD_LENGTH)*sizeof(char));
+	ans.data = (char*)malloc((config->DATA_LENGTH)*sizeof(char));
 	memset(ans.title, 0, sizeof(char)*config->CMD_LENGTH);
 	memset(ans.data, 0, sizeof(char)*config->DATA_LENGTH);
 	return ans;

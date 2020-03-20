@@ -10,13 +10,14 @@
 
 #include <stdint.h>
 #include <string.h>
+#include <stdlib.h>
 
 typedef struct cmd_config {
 	char CMD_BEGIN = '$';
 	char CMD_DELIMITER = ';';
 	char CMD_END = 0x0D;
-	uint8_t CMD_LENGTH = 2;
-	uint8_t DATA_LENGTH = 30;
+	unsigned int CMD_LENGTH = 2;
+	unsigned int DATA_LENGTH = 30;
 } cmd_config;
 
 typedef struct cmd {
