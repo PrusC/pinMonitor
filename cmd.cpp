@@ -31,6 +31,7 @@ void executeCMD(cmd* command) {
 	cmd_ready = 0;
 }
 
+
 void sendResult(cmd* command, char* res) {
 	if(Serial) {
 		Serial.print("answer: ");
@@ -38,6 +39,8 @@ void sendResult(cmd* command, char* res) {
 		Serial.print('\n');
 	}
 }
+
+
 void sendResult(cmd* command, int res) {
 	if(Serial) {
 		Serial.print("answer: ");
@@ -45,6 +48,7 @@ void sendResult(cmd* command, int res) {
 		Serial.print('\n');
 	}
 }
+
 
 void setPinMode(cmd* command) {
 	int pin;
@@ -75,6 +79,7 @@ void setPinMode(cmd* command) {
 	}
 }
 
+
 void setDigital(cmd* command) {
 	int pin;
 	int value;
@@ -103,6 +108,8 @@ void setDigital(cmd* command) {
 		sendResult(command, "OK");
 	}
 }
+
+
 void getDigital(cmd* command) {
 	int pin;
 	char *uid = getUID(command);
@@ -119,6 +126,7 @@ void getDigital(cmd* command) {
 		sendResult(command, val);
 	}
 }
+
 
 void setAnalog(cmd* command) {
 	int pin;
@@ -144,6 +152,7 @@ void setAnalog(cmd* command) {
 	}
 }
 
+
 void getAnalog(cmd* command) {
 	int pin;
 	char *uid = getUID(command);
@@ -160,6 +169,4 @@ void getAnalog(cmd* command) {
 		sendResult(command, val);
 	}
 }
-
-
 

@@ -31,11 +31,13 @@ cmd configureCMD() {
 	return ans;
 }
 
+
 void initializeCMD() {
 	memset(CMD.title, 0, sizeof(char)*CMD_TITTLE_LENGTH);
 	memset(CMD.data, 0, sizeof(char)*CMD_DATA_LENGTH);
 	CMD.data_cnt = 0;
 }
+
 
 void parseCmd(char c) {
 	if(!cmd_ready) {
@@ -87,12 +89,14 @@ void parseCmd(char c) {
 	}
 }
 
+
 void parseCmd(char *buffer, uint16_t buffer_size) {
 	uint8_t res = 0;
 	for(uint16_t i = 0; i < buffer_size; i ++) {
 		parseCmd(buffer[i]);
 	}
 }
+
 
 bool cmdTittleCmp(cmd *command, char *s) {
 	if(strcmp(command->title, s) == 0) {
@@ -101,12 +105,14 @@ bool cmdTittleCmp(cmd *command, char *s) {
 	return false;
 }
 
+
 bool cmdTittleCmp(char *s) {
 	if(cmd_ready) {
 		return cmdTittleCmp(&CMD, s);
 	}
 	return false;
 }
+
 
 char* getParam(cmd* command, uint8_t param_number) {
 	uint8_t cnt = 0;
@@ -127,6 +133,7 @@ char* getParam(cmd* command, uint8_t param_number) {
 	return NULL;
 }
 
+
 char* getParam(uint8_t param_number) {
 	if(cmd_ready) {
 		return getParam(&CMD, param_number);
@@ -134,10 +141,13 @@ char* getParam(uint8_t param_number) {
 	return NULL;
 }
 
+
 char* getUID(cmd* command) {
 	return getParam(command, 0);
 }
 
+
 char* getUID() {
 	return getParam(0);
 }
+
