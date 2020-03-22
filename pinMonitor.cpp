@@ -9,7 +9,7 @@ void loop() {
 
 }
 
-extern cmd CMD;
+//extern cmd CMD;
 
 void serialEvent() {
 	char c = Serial.read();
@@ -17,7 +17,10 @@ void serialEvent() {
 
 	if(cmd_ready) {
 		Serial.println(CMD.title);
-		Serial.println(CMD.data);
+		Serial.println(getParam(0));
+		Serial.println(getParam(1));
+		Serial.println(getParam(2));
+		Serial.println(getParam(4));
 		cmd_ready = 0;
 	}
 

@@ -12,24 +12,27 @@
 #include <string.h>
 #include <stdlib.h>
 
-typedef struct cmd_config {
-	char CMD_BEGIN = '$';
-	char CMD_DELIMITER = ';';
-	char CMD_END = 0x0D;
-	unsigned int CMD_LENGTH = 2;
-	unsigned int DATA_LENGTH = 30;
-} cmd_config;
-
 typedef struct cmd {
 	char *title;
 	char *data;
+	uint8_t data_cnt;
 } cmd;
 
 extern cmd CMD;
 extern uint8_t cmd_ready;
 
+cmd configureCMD();
+
 void parseCmd(char c);
 void parseCmd(char *buffer, uint16_t buffer_size);
-cmd configureCMD(cmd_config* config);
+
+bool cmdTittleCmp(cmd *command, char *s);
+bool cmdTittleCmp(char *s);
+
+char* getParam(cmd* command, uint8_t param_number);
+char* getParam(uint8_t param_number);
+
+char* getUID(cmd* command);
+char* getUID();
 
 #endif /* CMDPARSER_H_ */
