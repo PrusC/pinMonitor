@@ -11,5 +11,7 @@
 #include "cmdParser.h"
 #include "cmd.h"
 
+#define FW_VERSION "pinMonitor v0.2"
+
 
 #endif /* PINMONITOR_H_ */

@@ -27,6 +27,9 @@ void executeCMD(cmd* command) {
 	else if(strcmp(tittle, GET_ANALOG) == 0) {
 		getAnalog(command);
 	}
+	else if(strcmp(tittle, GET_FW_VERSION) == 0) {
+		sendResult(command, FW_VERSION);
+	}
 	else {
 		sendResult(command, "Unknown command");
 	}
