@@ -15,7 +15,7 @@
 #define GET_DIGITAL "GD"
 #define SET_ANALOG "SA"
 #define GET_ANALOG "GA"
-#define GET_FW_VERSION "WF"
+#define GET_FW_VERSION "FW"
 
 void executeCMD(cmd* command);
 void sendResult(cmd* command, char* res);
