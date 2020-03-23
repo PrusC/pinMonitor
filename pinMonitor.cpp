@@ -1,6 +1,8 @@
 #include <Arduino.h>
-#include "cmdParser.h"
-#include "cmd.h"
+//#include "cmdParser.h"
+//#include "cmd.h"
+
+#include "pinMonitor.h"
 
 void setup() {
 	Serial.begin(9600);

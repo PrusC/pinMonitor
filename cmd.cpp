@@ -5,7 +5,9 @@
  *      Author: Konstantin
  */
 
-#include "cmd.h"
+//#include "cmd.h"
+
+#include "pinMonitor.h"
 #include <Arduino.h>
 
 void executeCMD(cmd* command) {

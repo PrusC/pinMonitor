@@ -6,7 +6,8 @@
  */
 
 
-#include "cmdParser.h"
+//#include "cmdParser.h"
+#include "pinMonitor.h"
 
 #define CMD_BEGIN '$'
 #define CMD_DELIMITER ';'
