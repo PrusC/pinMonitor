@@ -2,7 +2,7 @@
  * cmd.h
  *
  *  Created on: 22 мар. 2020 г.
- *      Author: Konstantin
+ *      Author: PrusC
  */
 
 #ifndef CMD_H_
