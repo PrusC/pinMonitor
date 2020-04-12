@@ -1,6 +1,4 @@
 #include <Arduino.h>
-//#include "cmdParser.h"
-//#include "cmd.h"
 
 #include "pinMonitor.h"
 

@@ -2,7 +2,7 @@
  * pinMonitor.h
  *
  *  Created on: 23 мар. 2020 г.
- *      Author: kPrusakov
+ *      Author: Konstantin Prusakov
  */
 
 #ifndef PINMONITOR_H_

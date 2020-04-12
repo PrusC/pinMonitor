@@ -2,7 +2,7 @@
  * cmdParser.h
  *
  *  Created on: 17 мар. 2020 г.
- *      Author: PrusC
+ *      Author: Konstantin Prusakov
  */
 
 #ifndef CMDPARSER_H_

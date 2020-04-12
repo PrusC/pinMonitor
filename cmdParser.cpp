@@ -2,7 +2,7 @@
  * cmdParser.c
  *
  *  Created on: 17 мар. 2020 г.
- *      Author: PrusC
+ *      Author: Konstantin Prusakov
  */
 
 
