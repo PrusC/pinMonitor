@@ -9,14 +9,8 @@
 //#include "cmdParser.h"
 #include "pinMonitor.h"
 
-#define CMD_BEGIN '$'
-#define CMD_DELIMITER ';'
-#define CMD_END 0x0D
-#define CMD_TITTLE_LENGTH 2
-#define CMD_DATA_LENGTH 30
-
 uint16_t flag_cmd = 0;
-uint16_t rXcnt = 0;
+uint16_t received_cnt = 0;
 uint8_t cmd_ready = 0;
 uint8_t cmd_params_cnt = 0;
 
@@ -46,44 +40,44 @@ void parseCmd(char c) {
 			case 0:
 				if(c == CMD_BEGIN) {
 					flag_cmd = 1;
-					rXcnt = 0;
+					received_cnt = 0;
 					initializeCMD();
 				}
 				break;
 
 			case 1:
-				if(rXcnt >= CMD_TITTLE_LENGTH || c == CMD_DELIMITER) {
+				if(received_cnt >= CMD_TITTLE_LENGTH || c == CMD_DELIMITER) {
 					flag_cmd = 2;
-					if(rXcnt < CMD_DATA_LENGTH-1) {
-						CMD.title[rXcnt] = 0;
+					if(received_cnt < CMD_DATA_LENGTH-1) {
+						CMD.title[received_cnt] = 0;
 					}
-					rXcnt = 0;
+					received_cnt = 0;
 				} else {
-					CMD.title[rXcnt] = c;
-					rXcnt ++;
+					CMD.title[received_cnt] = c;
+					received_cnt ++;
 				}
 				break;
 
 			case 2:
 				if(c == CMD_END) {
-					if(rXcnt > 0 && CMD.data_cnt == 0) {
+					if(received_cnt > 0 && CMD.data_cnt == 0) {
 						CMD.data_cnt ++;
 					}
-					CMD.data[rXcnt] = 0;
+					CMD.data[received_cnt] = 0;
 					cmd_ready = 1;
 					flag_cmd = 0;
-					rXcnt = 0;
+					received_cnt = 0;
 				} else {
-					if(c == CMD_DELIMITER && rXcnt == 0) {
+					if(c == CMD_DELIMITER && received_cnt == 0) {
 						break;
 					}
 					if(c == CMD_DELIMITER) {
 						CMD.data_cnt ++;
-						CMD.data[rXcnt] = 0;
+						CMD.data[received_cnt] = 0;
 					} else {
-						CMD.data[rXcnt] = c;
+						CMD.data[received_cnt] = c;
 					}
-					rXcnt ++;
+					received_cnt ++;
 				}
 				break;
 		}

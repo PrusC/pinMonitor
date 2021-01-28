@@ -12,6 +12,12 @@
 #include <string.h>
 #include <stdlib.h>
 
+#define CMD_BEGIN '/'
+#define CMD_DELIMITER ';'
+#define CMD_END 0x0D
+#define CMD_TITTLE_LENGTH 2
+#define CMD_DATA_LENGTH 30
+
 typedef struct cmd {
 	char *title;
 	char *data;
